@@ -1,5 +1,5 @@
 import CarDetails from '../support/Pages/carDetails';
-import enquiryInfo from '../support/Pages/enquiryInfo';
+import invalidPhone from '../support/Pages/invalidPhone';
  
 describe('Policy Bazaar Flow', () => {
   it('should complete the flow and verify error messages', () => {
@@ -19,11 +19,11 @@ describe('Policy Bazaar Flow', () => {
     CarDetails.clickGridListItem(1);
     CarDetails.clickFourthGridItem();
  
-    enquiryInfo.typeName("sgr");
-    enquiryInfo.typeMobile("7567");
+    invalidPhone.typeName("sgr");
+    invalidPhone.typeMobile("7567");
  
-    enquiryInfo.clickSubmit();
-    enquiryInfo.verifyMobileError();
+    invalidPhone.clickSubmit();
+    invalidPhone.verifyMobileError();
   });
 });
  
