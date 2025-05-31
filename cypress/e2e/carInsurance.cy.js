@@ -20,10 +20,24 @@ describe('Policy Bazaar Flow', () => {
     CarDetails.clickFourthGridItem();
  
     invalidPhone.typeName("sgr");
-    invalidPhone.typeMobile("7567");
- 
+    invalidPhone.typeMobile(938624);
     invalidPhone.clickSubmit();
     invalidPhone.verifyMobileError();
+    
+    
+    invalidPhone.preload();
+    cy.wait(10000);
+    invalidPhone.typeName("sgr");
+    invalidPhone.typeMobile("adc");
+    invalidPhone.clickSubmit();
+    invalidPhone.verifyMobileError();
+
+    invalidPhone.preload();
+    cy.wait(10000);
+    invalidPhone.typeName("sgr");
+    var ph=98765432159
+    invalidPhone.typeMobile(ph);
+    invalidPhone.checkMobileNumber(ph);
   });
 });
  
