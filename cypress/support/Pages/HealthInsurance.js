@@ -1,0 +1,106 @@
+class HealthInsurance{
+  visit(){
+      cy.visit('https://health.policybazaar.com/');
+  }
+
+  newSearch(){
+    
+  }
+
+  toggleSelf(){  
+    
+  }
+
+  formSubmit(){
+     
+  }
+
+  selectMemberType(type) {
+      if (type === 'grandFather') {
+        cy.get('p.moreMembersLink > a').should('be.visible').click();
+      }
+      
+      cy.get(`.memberSelection__block > label.${type}`)
+        .as(`${type}Label`);
+  
+      cy.get(`@${type}Label`)
+        .prev('input[type="checkbox"]') 
+        .as(`${type}Checkbox`)
+        .check({ force: true });
+  
+      cy.get(`@${type}Checkbox`).should('be.checked');
+      cy.log(`Clicked checkbox for: ${type}`);
+    }
+ 
+    unCheckAll()
+    {
+        cy.get(`.memberSelection__block>input[type='checkbox']`).uncheck({force:true});
+    }
+    
+    submitForm() {
+      cy.get('form').submit();
+    }
+
+
+    verifyChildSelection(childType) { 
+      cy.get(`.memberSelection__block >label.${childType}`).prev('input[type="checkbox"]').check({force:true});
+      cy.get('form').submit();
+      cy.get('.text-error').invoke('text').should('eq','Please select self or Wife with child');
+      cy.get(`.memberSelection__block >label.${childType}`).prev('input[type="checkbox"]').uncheck({force:true});
+  }
+
+
+  selectPersonCorrectly(){
+      cy.get(`.memberSelection__block >label.male`).prev('input[type="checkbox"]').check({force:true})
+      cy.get(`.memberSelection__block >label.female`).prev('input[type="checkbox"]').check({force:true})
+      cy.get(`.memberSelection__block >label.son`).prev('input[type="checkbox"]').check({force:true})
+      cy.get(`.memberSelection__block >label.daughter`).prev('input[type="checkbox"]').check({force:true})
+  }
+
+
+  selectAge(selfAge, spouseAge, sonAge, daughterAge) {
+      
+      cy.get('#Self').select(selfAge.toString());
+      cy.get('#Spouse').select(spouseAge.toString());
+      cy.get('#Son').select(sonAge.toString());
+      cy.get('#Daughter').select(daughterAge.toString());
+  }
+
+
+  verifyAgeGapErrors(selfAge, spouseAge) {
+      const isSpouseYounger = selfAge > spouseAge;
+      if (isSpouseYounger) {
+          cy.get('select#Son')
+              .parents('.memberAgeRow')
+              .find('.text-error')
+              .should('be.visible')
+              .and('contain', 'Wife and son age gap should be 18 years or above.');
+          cy.log('Son age gap error verified for Wife.');
+  
+          cy.get('select#Daughter')
+              .parents('.memberAgeRow')
+              .find('.text-error')
+              .should('be.visible')
+              .and('contain', 'Wife and daughter age gap should be 18 years or above.');
+          cy.log('Daughter age gap error verified for Wife.');
+      } else {
+          cy.get('select#Son')
+              .parents('.memberAgeRow')
+              .find('.text-error')
+              .should('be.visible')
+              .and('contain', 'Self and son age gap should be 18 years or above.');
+          cy.log('Son age gap error verified for Self.');
+  
+          cy.get('select#Daughter')
+              .parents('.memberAgeRow')
+              .find('.text-error')
+              .should('be.visible')
+              .and('contain', 'Self and daughter age gap should be 18 years or above.');
+          cy.log('Daughter age gap error verified for Self.');
+      }
+  }
+  
+
+}
+
+export default new HealthInsurance();
