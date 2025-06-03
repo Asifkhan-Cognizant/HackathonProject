@@ -22,12 +22,15 @@ class travelForm{
         const endDate=new Date();
         endDate.setDate(today.getDate()+30);
         const options = { month: 'short', day: 'numeric', year: 'numeric' };
-        let srtDate=today.toLocaleDateString('en-US',options)
-        let endDay=endDate.toLocaleDateString('en-US',options)
-        cy.get(`button[aria-label="${srtDate}"]`,{ timeout: 30000 }).click({force:true})
-        cy.get('.MuiSvgIcon-root').click({multiple:true,force:true})
-        cy.get(`button[aria-label="${endDay}"]`).click({force:true})
-        cy.get('.travel_main_cta').click({multiple:true,force:true})           
+
+        let srtDate = today.toLocaleDateString('en-US', options)
+        let endDay = endDate.toLocaleDateString('en-US', options)
+        cy.get(`button[aria-label="${srtDate}"]`, { timeout: 30000 }).click({ force: true })
+        cy.get('.MuiSvgIcon-root').click({ multiple: true, force: true })
+        cy.get(`button[aria-label="${endDay}"]`).click({ force: true })
+        //cy.get('.travel_main_cta').contains("Done").click({multiple:true})
+        cy.get('.travel_main_cta').click({ multiple: true, force: true })
+         
     }
 
     Date(){
@@ -58,7 +61,7 @@ class travelForm{
         cy.get('#1').contains('Select age of traveller 2').click();
         cy.get('label[for="22 years_undefined"]').contains('22 years').click()
         cy.get('#ped_no').click();
-        cy.get('.travel_main_cta').click({force:true});        
+        cy.get('.travel_main_cta').click({ multiple: true,force:true })
     }
 
     Result(){      
