@@ -11,8 +11,7 @@ describe('Hackathon Project', () => {
     });
  
     it('To Verify successful navigation to Health Insurance page.', ()=>{
-      HealthInsurance.visit();
-      
+      HealthInsurance.visit();      
     });
 
     it('To Verify toggling "Self" for "Husband" option.', ()=>{
@@ -86,5 +85,7 @@ describe('Hackathon Project', () => {
       HealthInsurance.selectAge((ageValue),(ageValue-1),kidsage,kidsage)
       HealthInsurance.submitForm()
       HealthInsurance.verifyAgeGapErrors((ageValue),(ageValue-1));
+      HealthInsurance.selectAge((ageValue),(ageValue),kidsage,kidsage)
+      HealthInsurance.submitForm()
     })
 });
