@@ -48,5 +48,5 @@ class CarDetails {
         .click();
     }
 }  
-
+ 
 export default new CarDetails();
