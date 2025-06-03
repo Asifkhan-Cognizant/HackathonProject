@@ -1,36 +1,35 @@
 class travelForm{
-
     home(googleVisit,googleSearch){      
-            cy.visit(googleVisit);
-            cy.get('textarea.gLFyf').type(googleSearch);
-            cy.get('.sbct.PZPZlf').get('[data-view-type="1"]').eq(0).click();
-            cy.pause();
-            cy.get('[data-dtld="policybazaar.com"]').eq(0).click();
+        cy.visit(googleVisit);
+        cy.get('textarea.gLFyf').type(googleSearch);
+        cy.get('.sbct.PZPZlf').get('[data-view-type="1"]').eq(0).click();
+        cy.pause();
+        cy.get('[data-dtld="policybazaar.com"]').eq(0).click();
     }
 
     TravelVisit(travelVisit){
-       cy.origin(travelVisit,()=>{
-       cy.contains('p','Travel').click({ force: true });
-    })  
-     
+        cy.origin(travelVisit,()=>{
+            cy.contains('p','Travel').click({ force: true });
+        }); 
+    }
 
-    }
     CountryAndDateSelection(travelVisit){       
-            cy.get('.countryButton',{timeout:40000}).contains('Schengen').click({ multiple: true });
-            cy.get('.check-wrapper.select-box-wrapper').contains('France').click({multiple:true});
-            cy.get('.travel_main_cta').contains('Add').click({multiple:true});
-            cy.get('.newPq_duration_wrap__dateCol').contains('Start date').click({multiple:true})
-            const today=new Date();
-            const endDate=new Date();
-            endDate.setDate(today.getDate()+30);
-            const options = { month: 'short', day: 'numeric', year: 'numeric' };
-            let srtDate=today.toLocaleDateString('en-US',options)
-            let endDay=endDate.toLocaleDateString('en-US',options)
-            cy.get(`button[aria-label="${srtDate}"]`,{ timeout: 30000 }).click({force:true})
-            cy.get('.MuiSvgIcon-root').click({multiple:true,force:true})
-            cy.get(`button[aria-label="${endDay}"]`).click({force:true})
-            cy.get('.travel_main_cta').click({multiple:true,force:true})           
+        cy.get('.countryButton',{timeout:40000}).contains('Schengen').click({ multiple: true });
+        cy.get('.check-wrapper.select-box-wrapper').contains('France').click({multiple:true});
+        cy.get('.travel_main_cta').contains('Add').click({multiple:true});
+        cy.get('.newPq_duration_wrap__dateCol').contains('Start date').click({multiple:true})
+        const today=new Date();
+        const endDate=new Date();
+        endDate.setDate(today.getDate()+30);
+        const options = { month: 'short', day: 'numeric', year: 'numeric' };
+        let srtDate=today.toLocaleDateString('en-US',options)
+        let endDay=endDate.toLocaleDateString('en-US',options)
+        cy.get(`button[aria-label="${srtDate}"]`,{ timeout: 30000 }).click({force:true})
+        cy.get('.MuiSvgIcon-root').click({multiple:true,force:true})
+        cy.get(`button[aria-label="${endDay}"]`).click({force:true})
+        cy.get('.travel_main_cta').click({multiple:true,force:true})           
     }
+
     Date(){
         cy.reload()
         cy.get('.newPq_duration_wrap__dateCol').contains('Start date').click({multiple:true})
@@ -43,14 +42,12 @@ class travelForm{
         cy.get(`button[aria-label="${srtDate}"]`,{ timeout: 20000 }).click({force:true})
         cy.get('.MuiSvgIcon-root').click({multiple:true,force:true})
         cy.get(`button[aria-label="${endDay}"]`).click({force:true})        
-     
     }
-    Country(){
-        
+
+    Country(){        
         cy.get('.countryButton',{timeout:40000}).contains('Schengen').click({ multiple: true });
         cy.get('.check-wrapper.select-box-wrapper').contains('France').click({multiple:true});
         cy.get('.travel_main_cta').contains('Add').click({multiple:true});
-
     }
 
     Passenger(){
@@ -62,7 +59,6 @@ class travelForm{
         cy.get('label[for="22 years_undefined"]').contains('22 years').click()
         cy.get('#ped_no').click();
         cy.get('.travel_main_cta').click({force:true});        
-        //'https://travel.policybazaar.com'
     }
 
     Result(){      
@@ -76,23 +72,21 @@ class travelForm{
        cy.get('.toll_wrapper_web>.toll_inner_wrapper').each(($el,index)=>{
         const contactNumber=$el.text().trim();
         cy.log(`Contact ${index+1}: ${contactNumber}`)
-       })
-       
+       });       
     }
 
     CountryErrorCheck(){
         cy.get('.errorMsg.newPq_errorMsg').should('be.visible').then((e)=>{
             cy.log(e.text());
             expect(e.text()).to.equal('Please select your destination country');
-
-        })
+        });
     }
 
     TravellerErrorCheck(){
         cy.get('.errorMsg.newPq_errorMsg').should('be.visible').then((e)=>{
             cy.log(e.text());
             expect(e.text()).to.equal('Please add traveller(s)')
-        })
+        });
     }
     
     checkInvalidDate(){
@@ -115,9 +109,6 @@ class travelForm{
                 cy.log("Trying to select End date before giving start date");
         }
     }
-
-
-
 }
 
 export default travelForm
