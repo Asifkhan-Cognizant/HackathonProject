@@ -30,5 +30,5 @@ class invalidPhone{
           })
       }
     }
-   
+
     export default new invalidPhone();

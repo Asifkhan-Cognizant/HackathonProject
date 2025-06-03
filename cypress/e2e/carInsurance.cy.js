@@ -30,6 +30,7 @@ describe('Policy Bazaar Flow', () => {
     invalidPhone.typeMobile(938624);
     invalidPhone.clickSubmit();
     invalidPhone.verifyMobileError();
+
    
   })
 
@@ -45,15 +46,14 @@ describe('Policy Bazaar Flow', () => {
   })
 
   it("To Verify error message on entering non-numeric characters in phone number field",()=>{
-
     invalidPhone.preload();
     cy.wait(10000);
     invalidPhone.typeName("sgr");
     invalidPhone.typeMobile("adc");
     invalidPhone.clickSubmit();
     invalidPhone.verifyMobileError();
-
   })
+   
 });
 
 Cypress.on('uncaught:exception', (err, runnable) => {
