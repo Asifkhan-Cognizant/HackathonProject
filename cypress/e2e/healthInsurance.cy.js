@@ -11,8 +11,7 @@ describe('Hackathon Project', () => {
     });
  
     it('To Verify successful navigation to Health Insurance page.', ()=>{
-      HealthInsurance.visit();
-      
+      HealthInsurance.visit();      
     });
 
     it('To Verify toggling "Self" for "Husband" option.', ()=>{
