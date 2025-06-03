@@ -1,28 +1,21 @@
 class travelForm{
 
-    home(googleVisit,googleSearch){
-      
+    home(googleVisit,googleSearch){      
             cy.visit(googleVisit);
             cy.get('textarea.gLFyf').type(googleSearch);
             cy.get('.sbct.PZPZlf').get('[data-view-type="1"]').eq(0).click();
             cy.pause();
             cy.get('[data-dtld="policybazaar.com"]').eq(0).click();
-            
-           
-            
-
-    
     }
-    TravelVisit(travelVisit){
 
+    TravelVisit(travelVisit){
        cy.origin(travelVisit,()=>{
        cy.contains('p','Travel').click({ force: true });
     })  
      
 
     }
-    CountryAndDateSelection(travelVisit){
-       
+    CountryAndDateSelection(travelVisit){       
             cy.get('.countryButton',{timeout:40000}).contains('Schengen').click({ multiple: true });
             cy.get('.check-wrapper.select-box-wrapper').contains('France').click({multiple:true});
             cy.get('.travel_main_cta').contains('Add').click({multiple:true});
@@ -36,11 +29,7 @@ class travelForm{
             cy.get(`button[aria-label="${srtDate}"]`,{ timeout: 30000 }).click({force:true})
             cy.get('.MuiSvgIcon-root').click({multiple:true,force:true})
             cy.get(`button[aria-label="${endDay}"]`).click({force:true})
-            //cy.get('.travel_main_cta').contains("Done").click({multiple:true})
-            cy.get('.travel_main_cta').click({multiple:true,force:true})
-           
-          
-   
+            cy.get('.travel_main_cta').click({multiple:true,force:true})           
     }
     Date(){
         cy.reload()
@@ -67,7 +56,6 @@ class travelForm{
     }
 
     Passenger(){
-       
         cy.get('.newPq_travellers_wrap').find('a').contains('+ Add ').click({force:true});
         cy.get('label[for="traveller_2"]',{timeout:30000}).should('be.visible').click()
         cy.get('#divarrow_undefined').click();
@@ -75,19 +63,12 @@ class travelForm{
         cy.get('#1').contains('Select age of traveller 2').click();
         cy.get('label[for="22 years_undefined"]').contains('22 years').click()
         cy.get('#ped_no').click();
-        cy.get('.travel_main_cta').contains('Done').click({multiple:true})
-        
+        cy.get('.travel_main_cta').click({force:true});        
         //'https://travel.policybazaar.com'
-
-
     }
 
-    Result(){
-        
-
+    Result(){      
         cy.get('.travel_main_cta').contains('View plans ›').click({force:true});
-       
-        
     }
 
     CallDetails(){
@@ -122,7 +103,7 @@ class travelForm{
         newDate.setDate(today.getDate() - 1)
         const options = { month: 'short', day: 'numeric', year: 'numeric' }
         let srtDate = newDate.toLocaleDateString('en-US', options)
-        cy.get('.newPq_duration_wrap__dateCol').contains('Start date').click({ multiple: true })
+        cy.get('.newPq_duration_wrap__dateCol').contains('Start date').click({ multiple: true, force:true })
         if(cy.get(`button[aria-label="${srtDate}"]`, { timeout: 20000 }).click({ force: true })
             .should('be.disabled'))
         {
