@@ -1,25 +1,23 @@
 import travelForm from "../support/Pages/travelForm";
 
 describe("Hackathon Project", () => {
-  let googleVisit,googleSearch,travelVisit;
+  let googleVisit, googleSearch, travelVisit;
   const TravelForm = new travelForm();
 
   before(() => {
-    
-    cy.fixture("travelForm").then((data) => {
-      googleVisit=data.googleVisit
-      googleSearch = data.googleSearch;
-      travelVisit=data.travelVisit
-      
-    }).then(()=>{
-      Cypress.on("uncaught:exception", () => {
-        return false;
+    cy.fixture("travelForm")
+      .then((data) => {
+        googleVisit = data.googleVisit;
+        googleSearch = data.googleSearch;
+        travelVisit = data.travelVisit;
+      })
+      .then(() => {
+        Cypress.on("uncaught:exception", () => {
+          return false;
+        });
+        TravelForm.home(googleVisit, googleSearch, travelVisit);
+        TravelForm.TravelVisit(travelVisit);
       });
-      TravelForm.home(googleVisit, googleSearch,travelVisit);
-      TravelForm.TravelVisit(travelVisit);
-    })
-   
-    
   });
 
   beforeEach(() => {
@@ -34,59 +32,32 @@ describe("Hackathon Project", () => {
   //   TravelForm.home(googleVisit, googleSearch,travelVisit);
   //   TravelForm.TravelVisit(travelVisit);
   // });
- 
-  it("To Verify accurate selection of a European country and dummy travel dates.",()=>{
-    //cy.visit('https://travel.policybazaar.com/?newpq=1&utm_term=newjourney&utm_source=google_brand&utm_medium=ppc&utm_campaign=Brand_PolicyBazaar_Exact00PolicyBazaar&gad_source=1&gad_campaignid=2056207150&gbraid=0AAAAADwVZjJIK45Rl-dKuYm4KTAS2Ys_k&gclid=EAIaIQobChMI1c6p16HKjQMVY6VmAh2bSQiKEAAYASAAEgLWMPD_BwE&utm_content=newpq');
-   
-      TravelForm.CountryAndDateSelection(travelVisit)
-    
-    
 
-  })
+  it("To Verify accurate selection of a European country and dummy travel dates.", () => {
+    TravelForm.CountryAndDateSelection(travelVisit);
+  });
 
-  it("To Verify successful selection of 2 travelers (Ages 22, 21).",()=>{
-    //cy.visit('https://travel.policybazaar.com/?newpq=1&utm_term=newjourney&utm_source=google_brand&utm_medium=ppc&utm_campaign=Brand_PolicyBazaar_Exact00PolicyBazaar&gad_source=1&gad_campaignid=2056207150&gbraid=0AAAAADwVZjJIK45Rl-dKuYm4KTAS2Ys_k&gclid=EAIaIQobChMI1c6p16HKjQMVY6VmAh2bSQiKEAAYASAAEgLWMPD_BwE&utm_content=newpq');
-   
+  it("To Verify successful selection of 2 travelers (Ages 22, 21).", () => {
     TravelForm.Passenger(travelVisit);
+  });
 
-  })
-  
-
-  it("To Verify display of enquiry contact information",()=>{
-    //cy.visit('https://travel.policybazaar.com/?newpq=1&utm_term=newjourney&utm_source=google_brand&utm_medium=ppc&utm_campaign=Brand_PolicyBazaar_Exact00PolicyBazaar&gad_source=1&gad_campaignid=2056207150&gbraid=0AAAAADwVZjJIK45Rl-dKuYm4KTAS2Ys_k&gclid=EAIaIQobChMI1c6p16HKjQMVY6VmAh2bSQiKEAAYASAAEgLWMPD_BwE&utm_content=newpq');
+  it("To Verify display of enquiry contact information", () => {
     TravelForm.CallDetails();
+  });
 
-
-  })
-  // it("Next Page",()=>{
-  //   //cy.visit('https://travel.policybazaar.com/?newpq=1&utm_term=newjourney&utm_source=google_brand&utm_medium=ppc&utm_campaign=Brand_PolicyBazaar_Exact00PolicyBazaar&gad_source=1&gad_campaignid=2056207150&gbraid=0AAAAADwVZjJIK45Rl-dKuYm4KTAS2Ys_k&gclid=EAIaIQobChMI1c6p16HKjQMVY6VmAh2bSQiKEAAYASAAEgLWMPD_BwE&utm_content=newpq');
-   
-  //   TravelForm.Result();
-
-  // })
-
-  it("To Verify behavior when no destination is selected but user attempts to proceed.",()=>{
-   // cy.visit('https://travel.policybazaar.com/?newpq=1&utm_term=newjourney&utm_source=google_brand&utm_medium=ppc&utm_campaign=Brand_PolicyBazaar_Exact00PolicyBazaar&gad_source=1&gad_campaignid=2056207150&gbraid=0AAAAADwVZjJIK45Rl-dKuYm4KTAS2Ys_k&gclid=EAIaIQobChMI1c6p16HKjQMVY6VmAh2bSQiKEAAYASAAEgLWMPD_BwE&utm_content=newpq')
-   
+  it("To Verify behavior when no destination is selected but user attempts to proceed.", () => {
     TravelForm.Date();
     TravelForm.Passenger();
     TravelForm.CallDetails();
     TravelForm.Result();
     TravelForm.CountryErrorCheck();
+  });
 
-  })
-
-  it("To verify behaviour when no traveller information is selected but user attempts to proceed",()=>{
-   // cy.visit('https://travel.policybazaar.com/?newpq=1&utm_term=newjourney&utm_source=google_brand&utm_medium=ppc&utm_campaign=Brand_PolicyBazaar_Exact00PolicyBazaar&gad_source=1&gad_campaignid=2056207150&gbraid=0AAAAADwVZjJIK45Rl-dKuYm4KTAS2Ys_k&gclid=EAIaIQobChMI1c6p16HKjQMVY6VmAh2bSQiKEAAYASAAEgLWMPD_BwE&utm_content=newpq')
-  
+  it("To verify behaviour when no traveller information is selected but user attempts to proceed", () => {
     TravelForm.Date();
-    TravelForm.Country()
+    TravelForm.Country();
     TravelForm.CallDetails();
     TravelForm.Result();
     TravelForm.TravellerErrorCheck();
-
-
-  })
-
-
+  });
 });
