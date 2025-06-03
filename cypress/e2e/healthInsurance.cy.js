@@ -10,7 +10,7 @@ describe('Hackathon Project', () => {
       });
     });
  
-    it('To Verify successful navigation to Health Insurance page.', ()=>{
+    it('To Verify successful navigation to Health Insurance page.' ,  ()=>{
       HealthInsurance.visit();      
     });
 
