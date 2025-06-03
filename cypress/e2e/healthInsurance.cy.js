@@ -14,18 +14,33 @@ describe('Hackathon Project', () => {
       HealthInsurance.visit();
       
     });
- 
-    it('To verify self toggle for each Husband and Wife.', ()=>{
+
+    it('To Verify toggling "Self" for "Husband" option.', ()=>{
       cy.get('body').then(($body) => {
         if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
           HealthInsurance.newSearch();
           cy.wait(5000);
-          HealthInsurance.toggleSelf();
+          HealthInsurance.maleSelf();
         } else {
-          // Proceed with normal flow if text is not found
-          HealthInsurance.toggleSelf();
+          HealthInsurance.maleSelf();
         }
       });    
+    });
+
+    it('To Verify toggling "Self" for "Wife" option.', ()=>{
+      cy.get('body').then(($body) => {
+        if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
+          HealthInsurance.newSearch();
+          cy.wait(5000);
+          HealthInsurance.femaleSelf();
+        } else {
+          HealthInsurance.femaleSelf();
+        }
+      });    
+    });
+
+    it('To Verify whether we can able to toggle between "Male" and "Female",ensure that the respective elements are visible', ()=>{
+      HealthInsurance.toggleSelf();
     });
 
     it('Select all and check for errors',()=>{
