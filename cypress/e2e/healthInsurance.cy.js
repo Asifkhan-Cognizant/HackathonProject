@@ -10,32 +10,16 @@ describe('Hackathon Project', () => {
       });
     });
  
-    it('To Verify successful navigation to Health Insurance page.' ,  ()=>{
+    it('To Verify successful navigation to Health Insurance page. [smoke]' ,  ()=>{
       HealthInsurance.visit();      
     });
 
     it('To Verify toggling "Self" for "Husband" option.', ()=>{
-      cy.get('body').then(($body) => {
-        if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
-          HealthInsurance.newSearch();
-          cy.wait(5000);
-          HealthInsurance.maleSelf();
-        } else {
-          HealthInsurance.maleSelf();
-        }
-      });    
+      HealthInsurance.selfHusband();
     });
 
     it('To Verify toggling "Self" for "Wife" option.', ()=>{
-      cy.get('body').then(($body) => {
-        if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
-          HealthInsurance.newSearch();
-          cy.wait(5000);
-          HealthInsurance.femaleSelf();
-        } else {
-          HealthInsurance.femaleSelf();
-        }
-      });    
+      HealthInsurance.selfWife();
     });
 
     it('To Verify whether we can able to toggle between "Male" and "Female",ensure that the respective elements are visible', ()=>{

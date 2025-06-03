@@ -1,12 +1,38 @@
+import healthData from "../../fixtures/health.json";
+
 class HealthInsurance{
   visit(){
-    cy.visit('https://health.policybazaar.com/');
+    cy.visit(healthData.link);
     cy.get('body').should('contain', 'Health Insurance');
   }
 
   newSearch(){
     cy.wait(5000);
     cy.xpath('//*[@id="__nuxt"]/div/div[1]/div/div/div/form/section/article/div/section/button[1]').click();    
+  }
+
+  selfHusband(){
+    cy.get('body').then(($body) => {
+      if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
+        this.newSearch();
+        cy.wait(5000);
+        this.maleSelf();
+      } else {
+        this.maleSelf();
+      }
+    });       
+  }
+
+  selfWife(){
+    cy.get('body').then(($body) => {
+      if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
+        this.newSearch();
+        cy.wait(5000);
+        this.femaleSelf();
+      } else {
+        this.femaleSelf();
+      }
+    });     
   }
 
   femaleSelf(){
@@ -39,7 +65,7 @@ class HealthInsurance{
       } else {
         self = 'Wife';
       }
-      cy.log(`Self is`+self);
+      cy.log(`Self is `+self);
     });
   }
 
@@ -71,7 +97,7 @@ class HealthInsurance{
       } else {
         self = 'Wife';
       }
-      cy.log(`Self is`+self);
+      cy.log(`Self is `+self);
     });
   }
 
