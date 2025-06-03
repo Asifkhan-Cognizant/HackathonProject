@@ -9,6 +9,40 @@ class HealthInsurance{
     cy.xpath('//*[@id="__nuxt"]/div/div[1]/div/div/div/form/section/article/div/section/button[1]').click();    
   }
 
+  femaleSelf(){
+    cy.wait(1000);
+    cy.get('input#female').check({force: true}).should('be.checked');
+
+    cy.get('input[name="gender"]:checked')
+    .invoke('val')
+    .then(value => {
+      let self;
+      if(value == 1){
+        self = 'Husband';
+      } else {
+        self = 'Wife';
+      }
+      cy.log(`Self is `+self);
+    });
+  }
+
+  maleSelf(){
+    cy.wait(1000);
+    cy.get('input#male').check({force: true}).should('be.checked');
+   
+    cy.get('input[name="gender"]:checked')
+    .invoke('val')
+    .then(value => {
+      let self;
+      if(value == 1){
+        self = 'Husband';
+      } else {
+        self = 'Wife';
+      }
+      cy.log(`Self is`+self);
+    });
+  }
+
   toggleSelf(){  
     cy.wait(1000);
     cy.get('input#female').check({force: true}).should('be.checked');
