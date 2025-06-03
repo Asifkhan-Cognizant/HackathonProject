@@ -85,7 +85,6 @@ describe('Hackathon Project', () => {
       HealthInsurance.selectAge((ageValue),(ageValue-1),kidsage,kidsage)
       HealthInsurance.submitForm()
       HealthInsurance.verifyAgeGapErrors((ageValue),(ageValue-1));
-
       HealthInsurance.selectAge((ageValue),(ageValue),kidsage,kidsage)
       HealthInsurance.submitForm()
     })

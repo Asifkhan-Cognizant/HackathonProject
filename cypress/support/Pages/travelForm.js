@@ -42,9 +42,7 @@ class travelForm{
         let endDay=endDate.toLocaleDateString('en-US',options)
         cy.get(`button[aria-label="${srtDate}"]`,{ timeout: 20000 }).click({force:true})
         cy.get('.MuiSvgIcon-root').click({multiple:true,force:true})
-        cy.get(`button[aria-label="${endDay}"]`).click({force:true})
-        cy.get('.travel_main_cta').click({multiple:true,force:true});
-        
+        cy.get(`button[aria-label="${endDay}"]`).click({force:true})        
      
     }
     Country(){
