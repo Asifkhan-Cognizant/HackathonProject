@@ -115,7 +115,27 @@ class travelForm{
             expect(e.text()).to.equal('Please add traveller(s)')
         })
     }
- 
+    
+    checkInvalidDate(){
+        const today = new Date()
+        const newDate = new Date()
+        newDate.setDate(today.getDate() - 1)
+        const options = { month: 'short', day: 'numeric', year: 'numeric' }
+        let srtDate = newDate.toLocaleDateString('en-US', options)
+        cy.get('.newPq_duration_wrap__dateCol').contains('Start date').click({ multiple: true })
+        if(cy.get(`button[aria-label="${srtDate}"]`, { timeout: 20000 }).click({ force: true })
+            .should('be.disabled'))
+        {
+                cy.log("The Date Selected is Invalid");
+        }
+    }
+
+    checkEndDateselection(){
+        if(cy.get('.newPq_duration_wrap__dateCol').contains('End date').click({multiple:true,force:true})
+            .get('.newPq_dateField_wrap__field.--tripStart',{timeout:20000}).contains('Start date')){
+                cy.log("Trying to select End date before giving start date");
+        }
+    }
 
 
 

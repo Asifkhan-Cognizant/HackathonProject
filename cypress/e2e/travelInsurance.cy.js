@@ -37,6 +37,14 @@ describe("Hackathon Project", () => {
     TravelForm.CountryAndDateSelection(travelVisit);
   });
 
+  it('To Verify error message for selecting past travel start dates.',()=>{    
+    TravelForm.checkInvalidDate()
+  })
+  
+  it('To Verify error message for selecting travel end date before start date.',()=>{    
+    TravelForm.checkEndDateselection()
+  })
+
   it("To Verify successful selection of 2 travelers (Ages 22, 21).", () => {
     TravelForm.Passenger(travelVisit);
   });
