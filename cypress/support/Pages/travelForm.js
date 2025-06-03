@@ -28,8 +28,8 @@ class travelForm {
         cy.get(`button[aria-label="${srtDate}"]`, { timeout: 30000 }).click({ force: true })
         cy.get('.MuiSvgIcon-root').click({ multiple: true, force: true })
         cy.get(`button[aria-label="${endDay}"]`).click({ force: true })
-        cy.get('.travel_main_cta').contains("Done").click({multiple:true})
-        //cy.get('.travel_main_cta').click({ multiple: true, force: true })
+        //cy.get('.travel_main_cta').contains("Done").click({multiple:true})
+        cy.get('.travel_main_cta').click({ multiple: true, force: true })
     }
 
     Date() {
@@ -61,8 +61,8 @@ class travelForm {
         cy.get('#1').contains('Select age of traveller 2').click();
         cy.get('label[for="22 years_undefined"]').contains('22 years').click()
         cy.get('#ped_no').click();
-        //cy.get('.travel_main_cta').click({ multiple: true })
-        cy.get('.travel_main_cta').contains('Done').click({multiple:true})
+        cy.get('.travel_main_cta').click({ multiple: true,force:true })
+        //cy.get('.travel_main_cta').contains('Done').click({multiple:true})
     }
 
     Result() {
