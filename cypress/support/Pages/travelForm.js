@@ -75,7 +75,8 @@ class travelForm{
         cy.get('#1').contains('Select age of traveller 2').click();
         cy.get('label[for="22 years_undefined"]').contains('22 years').click()
         cy.get('#ped_no').click();
-        cy.get('.travel_main_cta').contains('Done').click({multiple:true})
+       // cy.get('.travel_main_cta').contains('Done').click({multiple:true})
+       cy.get('.travel_main_cta').click({force:true});
         
         //'https://travel.policybazaar.com'
 
