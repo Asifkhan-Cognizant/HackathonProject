@@ -2,7 +2,7 @@ import CarDetails from '../support/Pages/carDetails';
 import invalidPhone from '../support/Pages/invalidPhone.js';
  
 describe('Policy Bazaar Flow', () => {
- 
+
   let example;
   before(() => {
     cy.fixture('example').then((data) => {
@@ -11,12 +11,14 @@ describe('Policy Bazaar Flow', () => {
   });
  
   it('Navigation to Car Insurance page and ability to proceed without car number[smoke]', () => {
+
     CarDetails.visit();
  
     CarDetails.clickPrimaryBtn();
     CarDetails.verifyCarNumberError(example.carDetails.invalidCarNumber);
     CarDetails.clickCarRegDetailsButton();
   });
+
  
   it("To Verify accurate entry and acceptance of basic car details for new car.[smoke]",()=>{
     CarDetails.visit();
@@ -24,6 +26,7 @@ describe('Policy Bazaar Flow', () => {
     CarDetails.clickPrimaryBtn();
     CarDetails.verifyCarNumberError(example.carDetails.invalidCarNumber);
     CarDetails.clickCarRegDetailsButton();
+
     CarDetails.clickTruncateFirst();
     CarDetails.clickKia();
  
@@ -35,35 +38,40 @@ describe('Policy Bazaar Flow', () => {
     CarDetails.clickFourthGridItem();
  
   })
- 
+
   it("To Verify error message for phone number entry with less than 10 digits [smoke]",()=>{
     invalidPhone.carVisit();
     cy.wait(20000);
     invalidPhone.typeName(example.invalidPhone.name);
     invalidPhone.typeMobile(example.invalidPhone.mobile.shortNumeric);
+
     invalidPhone.clickSubmit();
     invalidPhone.verifyMobileError(example.contactDetails.invalidMobileNumber);
  
    
   })
- 
+
   it("To Verify error message for phone number entry with more than 10 digits [regression]",()=>{
     invalidPhone.carVisit();
     //invalidPhone.preload();
     cy.wait(20000);
     invalidPhone.typeName(example.invalidPhone.name);
     var ph=example.invalidPhone.mobile.longNumeric
+
+  
     invalidPhone.typeMobile(ph);
     invalidPhone.checkMobileNumber(ph);
  
   })
- 
+
   it("To Verify error message on entering non-numeric characters in phone number field [regression]",()=>{
     invalidPhone.carVisit();
     //invalidPhone.preload();
     cy.wait(20000);
     invalidPhone.typeName(example.invalidPhone.name);
     invalidPhone.typeMobile(example.invalidPhone.mobile.alphabetic);
+
+
     invalidPhone.clickSubmit();
     invalidPhone.verifyMobileError(example.contactDetails.invalidMobileNumber);
   })
