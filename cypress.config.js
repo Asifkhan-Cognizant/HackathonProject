@@ -15,10 +15,10 @@ module.exports = defineConfig({
     pageLoadTimeout: 1200000,
     defaultCommandTimeout: 30000,
     responseTimeout: 30000,
-    testIsolation: false,
+  //  testIsolation: false,
 
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+
       require('cypress-mochawesome-reporter/plugin')(on);
       require('@cypress/grep/src/plugin')(config);
       return config;
