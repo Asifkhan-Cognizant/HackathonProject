@@ -79,6 +79,16 @@ class HealthInsurance{
     cy.get('#step1ContinueBtn').click();
   }
 
+  selectAllMemberTypes()
+  {
+    cy.fixture("healthInsurance").then((data) => {
+      data.memberTypes.forEach((type) => {
+        this.selectMemberType(type);
+      });
+    });
+  }
+
+
   selectMemberType(type) {
       if (type === 'grandFather') {
         cy.get('p.moreMembersLink > a').should('be.visible').click();

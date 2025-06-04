@@ -1,0 +1,20 @@
+{
+    "memberTypes": [
+      "male",
+      "female",
+      "son",
+      "daughter",
+      "father",
+      "mother",
+      "grandFather",
+      "grandMother",
+      "fatherLaw",
+      "motherLaw"
+    ],
+    "ageData":
+    {
+      "ageValue": 28,
+      "kidsage": 10
+    }
+  }
+  
