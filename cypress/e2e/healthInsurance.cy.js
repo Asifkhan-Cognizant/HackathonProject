@@ -18,40 +18,40 @@ describe('Hackathon Project', () => {
     })
 
 
-    it('To Verify successful navigation to Health Insurance page.' ,  ()=>{
+    it('To Verify successful navigation to Health Insurance page.[regression]' ,  ()=>{
       HealthInsurance.visit();      
     });
   
 
-    it('To Verify toggling "Self" for "Husband" option.', ()=>{
+    it('To Verify toggling "Self" for "Husband" option.[regression]', ()=>{
       HealthInsurance.selfHusband();
     });
 
-    it('To Verify toggling "Self" for "Wife" option.', ()=>{
+    it('To Verify toggling "Self" for "Wife" option.[regression]', ()=>{
       HealthInsurance.selfWife();
     });
 
-    it('To Verify whether we can able to toggle between "Male" and "Female",ensure that the respective elements are visible', ()=>{
+    it('To Verify whether we can able to toggle between "Male" and "Female",ensure that the respective elements are visible.[regression]', ()=>{
       HealthInsurance.toggleSelf();
     });
 
-    it('Select all and check for errors',()=>
+    it('Select all and check for errors.[regression]',()=>
     {
       HealthInsurance.selectAllMemberTypes();
       HealthInsurance.unCheckAll();
      
     })
 
-    it('child selection and error validation',()=>{
+    it('child selection and error validation.[regression]',()=>{
       HealthInsurance.verifyChildSelection(child[0])
       HealthInsurance.verifyChildSelection(child[1])
     })
 
-    it('select Parents and children',()=>{
+    it('select Parents and children.[regression]',()=>{
       HealthInsurance.selectPersonCorrectly();
     })
 
-    it('Form Submission with Invalid Inputs',()=>{
+    it('Form Submission with Invalid Inputs.[regression]',()=>{
 
       HealthInsurance.submitForm()
       HealthInsurance.selectAge((ageData.ageValue-1),(ageData.ageValue),ageData.kidsage,ageData.kidsage)
@@ -64,7 +64,7 @@ describe('Hackathon Project', () => {
 
     })
 
-    it('Form Submission with correct values of age ',()=>{
+    it('Form Submission with correct values of age.[regression] ',()=>{
       HealthInsurance.selectAge((ageData.ageValue),(ageData.ageValue),ageData.kidsage,ageData.kidsage)
       HealthInsurance.submitForm()
     })

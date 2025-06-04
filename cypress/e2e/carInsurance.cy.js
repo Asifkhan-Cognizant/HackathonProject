@@ -2,7 +2,7 @@ import CarDetails from '../support/Pages/carDetails';
 import invalidPhone from '../support/Pages/invalidPhone';
  
 describe('Policy Bazaar Flow', () => {
-  it('Navigation to Car Insurance page and ability to proceed without car number', () => {
+  it('Navigation to Car Insurance page and ability to proceed without car number.[regression]', () => {
     CarDetails.visit();
 
     CarDetails.clickPrimaryBtn();
@@ -10,7 +10,7 @@ describe('Policy Bazaar Flow', () => {
     CarDetails.clickCarRegDetailsButton();
   });
 
-  it("To Verify accurate entry and acceptance of basic car details for new car.",()=>{
+  it("To Verify accurate entry and acceptance of basic car details for new car.[regression]",()=>{
     
     CarDetails.clickTruncateFirst();
     CarDetails.clickKia();
@@ -24,7 +24,7 @@ describe('Policy Bazaar Flow', () => {
 
   })
 
-  it("To Verify error message for phone number entry with less than 10 digits",()=>{
+  it("To Verify error message for phone number entry with less than 10 digits.[regression]",()=>{
    
     invalidPhone.typeName("sgr");
     invalidPhone.typeMobile(938624);
@@ -34,7 +34,7 @@ describe('Policy Bazaar Flow', () => {
    
   })
 
-  it("To Verify error message for phone number entry with more than 10 digits",()=>{
+  it("To Verify error message for phone number entry with more than 10 digits.[regression]",()=>{
 
     invalidPhone.preload();
     cy.wait(10000);
@@ -45,7 +45,7 @@ describe('Policy Bazaar Flow', () => {
 
   })
 
-  it("To Verify error message on entering non-numeric characters in phone number field",()=>{
+  it("To Verify error message on entering non-numeric characters in phone number field.[regression]",()=>{
     invalidPhone.preload();
     cy.wait(10000);
     invalidPhone.typeName("sgr");
