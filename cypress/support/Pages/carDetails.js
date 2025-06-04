@@ -4,18 +4,18 @@ class CarDetails {
   }
  
   clickPrimaryBtn() {
-    cy.get("button.primaryBtnV2", { timeout: 10000 })
+    cy.get("button.primaryBtnV2", { timeout: 30000 })
       .should('be.visible')
       .click();
   }
  
   verifyCarNumberError(invalidCarNumber) {
-    cy.get('.redText', { timeout: 10000 })
+    cy.get('.redText', { timeout: 30000 })
       .should("have.text", invalidCarNumber);
   }
  
   clickCarRegDetailsButton() {
-    cy.get('.CarRegDetails_blueTextButton__P1blP', { timeout: 10000 })
+    cy.get('.CarRegDetails_blueTextButton__P1blP', { timeout: 30000 })
       .should('be.visible')
       .click();
   }

@@ -10,7 +10,7 @@ describe('Policy Bazaar Flow', () => {
     });
   });
  
-  it('Navigation to Car Insurance page and ability to proceed without car number', () => {
+  it('Navigation to Car Insurance page and ability to proceed without car number[smoke]', () => {
     CarDetails.visit();
  
     CarDetails.clickPrimaryBtn();
@@ -18,7 +18,7 @@ describe('Policy Bazaar Flow', () => {
     CarDetails.clickCarRegDetailsButton();
   });
  
-  it("To Verify accurate entry and acceptance of basic car details for new car.",()=>{
+  it("To Verify accurate entry and acceptance of basic car details for new car.[smoke]",()=>{
     CarDetails.visit();
  
     CarDetails.clickPrimaryBtn();
