@@ -9,21 +9,29 @@ describe('Hackathon Project', () => {
         return false;
       });
     });
- 
-    it('To Verify successful navigation to Health Insurance page. [smoke]' ,  ()=>{
+    
+    it('To Verify successful navigation to Health Insurance page.' ,  ()=>{
       HealthInsurance.visit();      
+      HealthInsurance.newSearch();
+      HealthInsurance.unCheckAll();
     });
 
     it('To Verify toggling "Self" for "Husband" option.', ()=>{
+      HealthInsurance.visit();
       HealthInsurance.selfHusband();
+      HealthInsurance.unCheckAll();
     });
 
     it('To Verify toggling "Self" for "Wife" option.', ()=>{
+      HealthInsurance.visit();
       HealthInsurance.selfWife();
+      HealthInsurance.unCheckAll();
     });
 
     it('To Verify whether we can able to toggle between "Male" and "Female",ensure that the respective elements are visible', ()=>{
+      HealthInsurance.visit();
       HealthInsurance.toggleSelf();
+      HealthInsurance.unCheckAll();
     });
 
     it('Select all and check for errors',()=>{

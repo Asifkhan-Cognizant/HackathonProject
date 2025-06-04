@@ -7,32 +7,29 @@ class HealthInsurance{
   }
 
   newSearch(){
-    cy.wait(5000);
-    cy.xpath('//*[@id="__nuxt"]/div/div[1]/div/div/div/form/section/article/div/section/button[1]').click();    
+    cy.get('body').then(($body) => {
+      if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
+        cy.wait(5000);
+        cy.get('form.pre-lead-wrapper__main')
+          .find('button')
+          .first()
+          .click();
+        cy.wait(5000);
+        cy.log('New Search Clicked!!!!');
+      } else {
+        cy.log('New Search not appeared');
+      }
+    });   
   }
 
   selfHusband(){
-    cy.get('body').then(($body) => {
-      if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
-        this.newSearch();
-        cy.wait(5000);
-        this.maleSelf();
-      } else {
-        this.maleSelf();
-      }
-    });       
+    this.newSearch();
+    this.maleSelf();
   }
 
   selfWife(){
-    cy.get('body').then(($body) => {
-      if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
-        this.newSearch();
-        cy.wait(5000);
-        this.femaleSelf();
-      } else {
-        this.femaleSelf();
-      }
-    });     
+    this.newSearch();
+    this.femaleSelf();
   }
 
   femaleSelf(){
@@ -69,36 +66,18 @@ class HealthInsurance{
     });
   }
 
-  toggleSelf(){  
+
+  toggleSelf(){ 
+    this.newSearch();
     cy.wait(1000);
     cy.get('input#female').check({force: true}).should('be.checked');
 
-    cy.get('input[name="gender"]:checked')
-    .invoke('val')
-    .then(value => {
-      let self;
-      if(value == 1){
-        self = 'Husband';
-      } else {
-        self = 'Wife';
-      }
-      cy.log(`Self is `+self);
-    });
+    this.femaleSelf();
    
     cy.wait(1000);
     cy.get('input#male').check({force: true}).should('be.checked');
    
-    cy.get('input[name="gender"]:checked')
-    .invoke('val')
-    .then(value => {
-      let self;
-      if(value == 1){
-        self = 'Husband';
-      } else {
-        self = 'Wife';
-      }
-      cy.log(`Self is `+self);
-    });
+    this.maleSelf();
   }
 
   formSubmit(){
@@ -124,6 +103,7 @@ class HealthInsurance{
  
   unCheckAll(){
     cy.get(`.memberSelection__block>input[type='checkbox']`).uncheck({force:true});
+    cy.wait(3000);
   }
     
   submitForm() {
