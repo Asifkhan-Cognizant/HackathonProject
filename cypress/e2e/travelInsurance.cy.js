@@ -1,6 +1,6 @@
 
  
-import travelForm from "../support/Pages/travelForm";
+import travelForm from "../support/Pages/TravelInsurance";
  
 describe("Hackathon Project", () => {
   let googleVisit, googleSearch, travelVisit;

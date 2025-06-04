@@ -19,6 +19,5 @@ import './commands'
 // //require('cypress-grep')();
 import 'cypress-mochawesome-reporter/register';
 
-require('@cypress/grep')
 
 

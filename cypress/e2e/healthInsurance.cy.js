@@ -11,6 +11,7 @@ describe('Hackathon Project', () => {
       });
     });
 
+
     before(()=>{
       cy.fixture("healthInsurance").then((data) => {
         ageData = data.ageData;
@@ -18,9 +19,7 @@ describe('Hackathon Project', () => {
     })
 
 
-
     it('To Verify successful navigation to Health Insurance page.', { tags: ['smoke'] },  ()=>{
-
       HealthInsurance.visit();      
       HealthInsurance.unCheckAll();
     });
