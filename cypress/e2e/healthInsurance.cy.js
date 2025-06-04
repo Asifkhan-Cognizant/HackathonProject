@@ -3,89 +3,93 @@ import HealthInsurance from "../support/Pages/HealthInsurance";
 describe('Hackathon Project', () => {
  
   const child=['son','daughter']
+  let ageData;
     beforeEach(()=>{
       cy.viewport(1920, 1080);
       Cypress.on('uncaught:exception', (err) => {
         return false;
       });
     });
- 
-    it('To Verify successful navigation to Health Insurance page.' ,  ()=>{
+
+    before(()=>{
+      cy.fixture("healthInsurance").then((data) => {
+        ageData = data.ageData;
+      });
+    })
+
+
+    it('To Verify successful navigation to Health Insurance page.', { tags: ['smoke'] },  ()=>{
       HealthInsurance.visit();      
+      HealthInsurance.unCheckAll();
     });
-
-    it('To Verify toggling "Self" for "Husband" option.', ()=>{
-      cy.get('body').then(($body) => {
-        if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
-          HealthInsurance.newSearch();
-          cy.wait(5000);
-          HealthInsurance.maleSelf();
-        } else {
-          HealthInsurance.maleSelf();
-        }
-      });    
+ 
+    it('To Verify toggling "Self" for "Husband" option.', { tags: ['sanity'] },  ()=>{
+      HealthInsurance.visit();
+      HealthInsurance.selfHusband();
+      HealthInsurance.unCheckAll();
     });
-
-    it('To Verify toggling "Self" for "Wife" option.', ()=>{
-      cy.get('body').then(($body) => {
-        if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
-          HealthInsurance.newSearch();
-          cy.wait(5000);
-          HealthInsurance.femaleSelf();
-        } else {
-          HealthInsurance.femaleSelf();
-        }
-      });    
+ 
+    it('To Verify toggling "Self" for "Wife" option.', { tags: ['sanity'] }, ()=>{
+      HealthInsurance.visit();
+      HealthInsurance.selfWife();
+      HealthInsurance.unCheckAll();
     });
-
-    it('To Verify whether we can able to toggle between "Male" and "Female",ensure that the respective elements are visible', ()=>{
+ 
+    it('To Verify toggling between "Male" and "Female" visibility.', { tags: ['sanity'] }, ()=>{
+      HealthInsurance.visit();
       HealthInsurance.toggleSelf();
+      HealthInsurance.unCheckAll();
     });
+ 
 
-    it('Select all and check for errors',()=>{
-      const memberTypes = [
-        'male',
-        'female',
-        'son',
-        'daughter',
-        'father',
-        'mother',
-        'grandFather',
-        'grandMother',
-        'fatherLaw',
-        'motherLaw'
-      ];
-
-      memberTypes.forEach(types=>{
-        HealthInsurance.selectMemberType(types);
-      }) 
-
+    it('Select all and check for errors.', { tags: ['regression'] }, ()=>
+    {
+      HealthInsurance.visit();
+      HealthInsurance.selectAllMemberTypes();
       HealthInsurance.unCheckAll();
      
     })
 
-    it('child selection and error validation',()=>{
+    it('Child selection and error validation.', { tags: ['regression'] }, ()=>{
+      HealthInsurance.visit();
+      HealthInsurance.unCheckAll();
       HealthInsurance.verifyChildSelection(child[0])
       HealthInsurance.verifyChildSelection(child[1])
     })
 
-    it('select Parents and children',()=>{
+    it('Select Parents and children.', { tags: ['retest'] },()=>{
+      HealthInsurance.visit();
+      HealthInsurance.unCheckAll();
+      cy.wait(1000);
       HealthInsurance.selectPersonCorrectly();
+      HealthInsurance.submitForm();
     })
 
-    it('Form Submission and Navigation to next Page',()=>{
+    it('Form Submission with Invalid Inputs.', { tags: ['retest'] },()=>{
+      HealthInsurance.visit();
+      HealthInsurance.unCheckAll();
+      cy.wait(1000);
+      HealthInsurance.selectPersonCorrectly();
+      cy.wait(1000);
       HealthInsurance.submitForm()
-      let ageValue=28;
-      let kidsage=10;
 
-      HealthInsurance.selectAge((ageValue-1),(ageValue),kidsage,kidsage)
+      HealthInsurance.selectAge((ageData.ageValue-1),(ageData.ageValue),ageData.kidsage,ageData.kidsage)
       HealthInsurance.submitForm()
-      HealthInsurance.verifyAgeGapErrors((ageValue-1),(ageValue));
+      HealthInsurance.verifyAgeGapErrors((ageData.ageValue-1),(ageData.ageValue));
    
-      HealthInsurance.selectAge((ageValue),(ageValue-1),kidsage,kidsage)
+      HealthInsurance.selectAge((ageData.ageValue),(ageData.ageValue-1),ageData.kidsage,ageData.kidsage)
       HealthInsurance.submitForm()
-      HealthInsurance.verifyAgeGapErrors((ageValue),(ageValue-1));
-      HealthInsurance.selectAge((ageValue),(ageValue),kidsage,kidsage)
+      HealthInsurance.verifyAgeGapErrors((ageData.ageValue),(ageData.ageValue-1));
+
+    })
+
+    it('Form Submission with correct values of age.', { tags: ['sanity', 'smoke'] },()=>{
+      HealthInsurance.visit();
+      HealthInsurance.unCheckAll();
+      HealthInsurance.selectPersonCorrectly();
+      HealthInsurance.submitForm()
+
+      HealthInsurance.selectAge((ageData.ageValue),(ageData.ageValue),ageData.kidsage,ageData.kidsage)
       HealthInsurance.submitForm()
     })
 });
