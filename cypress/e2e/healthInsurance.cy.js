@@ -3,63 +3,41 @@ import HealthInsurance from "../support/Pages/HealthInsurance";
 describe('Hackathon Project', () => {
  
   const child=['son','daughter']
+  let ageData;
     beforeEach(()=>{
       cy.viewport(1920, 1080);
       Cypress.on('uncaught:exception', (err) => {
         return false;
       });
     });
- 
+
+    before(()=>{
+      cy.fixture("healthInsurance").then((data) => {
+        ageData = data.ageData;
+      });
+    })
+
+
     it('To Verify successful navigation to Health Insurance page.' ,  ()=>{
       HealthInsurance.visit();      
     });
+  
 
     it('To Verify toggling "Self" for "Husband" option.', ()=>{
-      cy.get('body').then(($body) => {
-        if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
-          HealthInsurance.newSearch();
-          cy.wait(5000);
-          HealthInsurance.maleSelf();
-        } else {
-          HealthInsurance.maleSelf();
-        }
-      });    
+      HealthInsurance.selfHusband();
     });
 
     it('To Verify toggling "Self" for "Wife" option.', ()=>{
-      cy.get('body').then(($body) => {
-        if ($body.find('*:contains("You last searched health insurance for")').length > 0) {
-          HealthInsurance.newSearch();
-          cy.wait(5000);
-          HealthInsurance.femaleSelf();
-        } else {
-          HealthInsurance.femaleSelf();
-        }
-      });    
+      HealthInsurance.selfWife();
     });
 
     it('To Verify whether we can able to toggle between "Male" and "Female",ensure that the respective elements are visible', ()=>{
       HealthInsurance.toggleSelf();
     });
 
-    it('Select all and check for errors',()=>{
-      const memberTypes = [
-        'male',
-        'female',
-        'son',
-        'daughter',
-        'father',
-        'mother',
-        'grandFather',
-        'grandMother',
-        'fatherLaw',
-        'motherLaw'
-      ];
-
-      memberTypes.forEach(types=>{
-        HealthInsurance.selectMemberType(types);
-      }) 
-
+    it('Select all and check for errors',()=>
+    {
+      HealthInsurance.selectAllMemberTypes();
       HealthInsurance.unCheckAll();
      
     })
@@ -73,19 +51,21 @@ describe('Hackathon Project', () => {
       HealthInsurance.selectPersonCorrectly();
     })
 
-    it('Form Submission and Navigation to next Page',()=>{
-      HealthInsurance.submitForm()
-      let ageValue=28;
-      let kidsage=10;
+    it('Form Submission with Invalid Inputs',()=>{
 
-      HealthInsurance.selectAge((ageValue-1),(ageValue),kidsage,kidsage)
       HealthInsurance.submitForm()
-      HealthInsurance.verifyAgeGapErrors((ageValue-1),(ageValue));
+      HealthInsurance.selectAge((ageData.ageValue-1),(ageData.ageValue),ageData.kidsage,ageData.kidsage)
+      HealthInsurance.submitForm()
+      HealthInsurance.verifyAgeGapErrors((ageData.ageValue-1),(ageData.ageValue));
    
-      HealthInsurance.selectAge((ageValue),(ageValue-1),kidsage,kidsage)
+      HealthInsurance.selectAge((ageData.ageValue),(ageData.ageValue-1),ageData.kidsage,ageData.kidsage)
       HealthInsurance.submitForm()
-      HealthInsurance.verifyAgeGapErrors((ageValue),(ageValue-1));
-      HealthInsurance.selectAge((ageValue),(ageValue),kidsage,kidsage)
+      HealthInsurance.verifyAgeGapErrors((ageData.ageValue),(ageData.ageValue-1));
+
+    })
+
+    it('Form Submission with correct values of age ',()=>{
+      HealthInsurance.selectAge((ageData.ageValue),(ageData.ageValue),ageData.kidsage,ageData.kidsage)
       HealthInsurance.submitForm()
     })
 });
