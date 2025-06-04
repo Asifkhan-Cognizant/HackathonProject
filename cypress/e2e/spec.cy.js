@@ -1,7 +1,8 @@
 
- 
 import travelForm from "../support/Pages/TravelInsurance";
 import HealthInsurance from "../support/Pages/HealthInsurance";
+import CarDetails from "../support/Pages/carDetails";
+import invalidPhone from "../support/Pages/InvalidPhoneNumber";
  
 describe("Hackathon Project", () => {
   let googleVisit, googleSearch, travelVisit;
