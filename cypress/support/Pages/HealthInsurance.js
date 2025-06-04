@@ -8,7 +8,9 @@ class HealthInsurance{
 
   newSearch(){
     cy.wait(5000);
-    cy.xpath('//*[@id="__nuxt"]/div/div[1]/div/div/div/form/section/article/div/section/button[1]').click();    
+    cy.get('form').within(()=>{
+      cy.get('.secondaryOutlinedCta').click();
+    });    
   }
 
   selfHusband(){

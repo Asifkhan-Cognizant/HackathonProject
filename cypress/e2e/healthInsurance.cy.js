@@ -24,34 +24,42 @@ describe('Hackathon Project', () => {
   
 
     it('To Verify toggling "Self" for "Husband" option.', ()=>{
+      HealthInsurance.visit();  
       HealthInsurance.selfHusband();
     });
 
     it('To Verify toggling "Self" for "Wife" option.', ()=>{
+      HealthInsurance.visit();  
       HealthInsurance.selfWife();
     });
 
     it('To Verify whether we can able to toggle between "Male" and "Female",ensure that the respective elements are visible', ()=>{
+      HealthInsurance.visit();  
       HealthInsurance.toggleSelf();
     });
 
     it('Select all and check for errors',()=>
     {
+      HealthInsurance.visit();
       HealthInsurance.selectAllMemberTypes();
       HealthInsurance.unCheckAll();
      
     })
 
     it('child selection and error validation',()=>{
+      HealthInsurance.visit();
       HealthInsurance.verifyChildSelection(child[0])
       HealthInsurance.verifyChildSelection(child[1])
     })
 
     it('select Parents and children',()=>{
+      HealthInsurance.visit();
       HealthInsurance.selectPersonCorrectly();
     })
 
     it('Form Submission with Invalid Inputs',()=>{
+      HealthInsurance.visit();
+      HealthInsurance.selectPersonCorrectly();
 
       HealthInsurance.submitForm()
       HealthInsurance.selectAge((ageData.ageValue-1),(ageData.ageValue),ageData.kidsage,ageData.kidsage)
@@ -65,6 +73,9 @@ describe('Hackathon Project', () => {
     })
 
     it('Form Submission with correct values of age ',()=>{
+      HealthInsurance.visit();
+      HealthInsurance.selectPersonCorrectly();
+      
       HealthInsurance.selectAge((ageData.ageValue),(ageData.ageValue),ageData.kidsage,ageData.kidsage)
       HealthInsurance.submitForm()
     })
