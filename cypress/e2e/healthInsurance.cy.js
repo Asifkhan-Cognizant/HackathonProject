@@ -61,15 +61,19 @@ describe('Hackathon Project', () => {
     it('select Parents and children',()=>{
       HealthInsurance.visit();
       HealthInsurance.unCheckAll();
+      cy.wait(1000);
       HealthInsurance.selectPersonCorrectly();
+      HealthInsurance.submitForm();
     })
 
     it('Form Submission with Invalid Inputs',()=>{
       HealthInsurance.visit();
       HealthInsurance.unCheckAll();
+      cy.wait(1000);
       HealthInsurance.selectPersonCorrectly();
-
+      cy.wait(1000);
       HealthInsurance.submitForm()
+
       HealthInsurance.selectAge((ageData.ageValue-1),(ageData.ageValue),ageData.kidsage,ageData.kidsage)
       HealthInsurance.submitForm()
       HealthInsurance.verifyAgeGapErrors((ageData.ageValue-1),(ageData.ageValue));

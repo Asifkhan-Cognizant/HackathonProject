@@ -119,12 +119,14 @@ class HealthInsurance{
     
   submitForm() {
     cy.get('form').submit();
+    cy.wait(4000);
   }
 
 
   verifyChildSelection(childType) { 
     cy.get(`.memberSelection__block >label.${childType}`).prev('input[type="checkbox"]').check({force:true});
     cy.get('form').submit();
+    cy.wait(1000);
     cy.get('.text-error').invoke('text').should('eq','Please select self or Wife with child');
     cy.get(`.memberSelection__block >label.${childType}`).prev('input[type="checkbox"]').uncheck({force:true});
   }
