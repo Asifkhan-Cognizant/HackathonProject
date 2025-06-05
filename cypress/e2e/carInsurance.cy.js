@@ -1,17 +1,32 @@
-import CarDetails from '../support/Pages/carDetails';
-import invalidPhone from '../support/Pages/invalidPhone';
+import CarDetails from '../support/Pages/carDetails.js';
+import invalidPhone from '../support/Pages/Utility.js';
  
 describe('Policy Bazaar Flow', () => {
-  it('Navigation to Car Insurance page and ability to proceed without car number', () => {
-    CarDetails.visit();
 
+  let example;
+  before(() => {
+    cy.fixture('example').then((data) => {
+      example = data;
+    });
+  });
+ 
+  it('Navigation to Car Insurance page and ability to proceed without car number[smoke]', () => {
+
+    CarDetails.visit();
+ 
     CarDetails.clickPrimaryBtn();
-    CarDetails.verifyCarNumberError();
+    CarDetails.verifyCarNumberError(example.carDetails.invalidCarNumber);
     CarDetails.clickCarRegDetailsButton();
   });
 
-  it("To Verify accurate entry and acceptance of basic car details for new car.",()=>{
-    
+ 
+  it("To Verify accurate entry and acceptance of basic car details for new car.[smoke]",()=>{
+    CarDetails.visit();
+ 
+    CarDetails.clickPrimaryBtn();
+    CarDetails.verifyCarNumberError(example.carDetails.invalidCarNumber);
+    CarDetails.clickCarRegDetailsButton();
+
     CarDetails.clickTruncateFirst();
     CarDetails.clickKia();
  
@@ -21,41 +36,49 @@ describe('Policy Bazaar Flow', () => {
  
     CarDetails.clickGridListItem(1);
     CarDetails.clickFourthGridItem();
-
+ 
   })
 
-  it("To Verify error message for phone number entry with less than 10 digits",()=>{
-   
-    invalidPhone.typeName("sgr");
-    invalidPhone.typeMobile(938624);
+  it("To Verify error message for phone number entry with less than 10 digits [smoke]",()=>{
+    invalidPhone.carVisit();
+    cy.wait(20000);
+    invalidPhone.typeName(example.invalidPhone.name);
+    invalidPhone.typeMobile(example.invalidPhone.mobile.shortNumeric);
+
     invalidPhone.clickSubmit();
-    invalidPhone.verifyMobileError();
-
+    invalidPhone.verifyMobileError(example.contactDetails.invalidMobileNumber);
+ 
    
   })
 
-  it("To Verify error message for phone number entry with more than 10 digits",()=>{
+  it("To Verify error message for phone number entry with more than 10 digits [regression]",()=>{
+    invalidPhone.carVisit();
+    //invalidPhone.preload();
+    cy.wait(20000);
+    invalidPhone.typeName(example.invalidPhone.name);
+    var ph=example.invalidPhone.mobile.longNumeric
 
-    invalidPhone.preload();
-    cy.wait(10000);
-    invalidPhone.typeName("sgr");
-    var ph=98765432159
+  
     invalidPhone.typeMobile(ph);
     invalidPhone.checkMobileNumber(ph);
-
+ 
   })
 
-  it("To Verify error message on entering non-numeric characters in phone number field",()=>{
-    invalidPhone.preload();
-    cy.wait(10000);
-    invalidPhone.typeName("sgr");
-    invalidPhone.typeMobile("adc");
+  it("To Verify error message on entering non-numeric characters in phone number field [regression]",()=>{
+    invalidPhone.carVisit();
+    //invalidPhone.preload();
+    cy.wait(20000);
+    invalidPhone.typeName(example.invalidPhone.name);
+    invalidPhone.typeMobile(example.invalidPhone.mobile.alphabetic);
+
+
     invalidPhone.clickSubmit();
-    invalidPhone.verifyMobileError();
+    invalidPhone.verifyMobileError(example.contactDetails.invalidMobileNumber);
   })
    
 });
-
+ 
 Cypress.on('uncaught:exception', (err, runnable) => {
   return false;
 });
+ 

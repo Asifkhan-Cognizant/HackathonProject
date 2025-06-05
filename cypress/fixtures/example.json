@@ -1,5 +1,23 @@
 {
-  "name": "Using fixtures to represent data",
-  "email": "hello@cypress.io",
-  "body": "Fixtures are a great way to mock data for responses to routes"
+ 
+  "defaultData": {
+    "name": "Using fixtures to represent data",
+    "email": "hello@cypress.io",
+    "body": "Fixtures are a great way to mock data for responses to routes"
+  },
+ 
+  "invalidPhone": {
+    "name": "sgr",
+    "mobile": {
+      "shortNumeric": 938624,
+      "alphabetic": "adc",
+      "longNumeric": 98765432159
+    }
+  },
+  "carDetails": {
+    "invalidCarNumber": "Please enter a valid car number"
+  },
+  "contactDetails": {
+    "invalidMobileNumber": "Enter a valid mobile number"
+   }
 }

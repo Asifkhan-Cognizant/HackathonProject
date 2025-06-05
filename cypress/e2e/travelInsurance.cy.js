@@ -1,26 +1,10 @@
 
  
-import travelForm from "../support/Pages/travelForm";
+import travelForm from "../support/Pages/TravelInsurance";
  
 describe("Hackathon Project", () => {
   let googleVisit, googleSearch, travelVisit;
   const TravelForm = new travelForm();
- 
-  before(() => {
-    cy.fixture("travelForm")
-      .then((data) => {
-        googleVisit = data.googleVisit;
-        googleSearch = data.googleSearch;
-        travelVisit = data.travelVisit;
-      })
-      .then(() => {
-        Cypress.on("uncaught:exception", () => {
-          return false;
-        });
-        TravelForm.home(googleVisit, googleSearch, travelVisit);
-        TravelForm.TravelVisit(travelVisit);
-      });
-  });
  
   beforeEach(() => {
     Cypress.on("uncaught:exception", () => {
@@ -28,34 +12,38 @@ describe("Hackathon Project", () => {
     });
   });
  
-  // it("To Verify seamless navigation to Travel Insurance page.", () => {
-  //    // cy.visit('https://www.policybazaar.com/?utm_source=google_brand&utm_medium=ppc&utm_term=Policy%20bazaar&utm_campaign=Brand_Policy_Bazaar_Exact00Brand-policy_bazaar&gad_source=1&gad_campaignid=2055878099&gbraid=0AAAAADwVZjK6vYTCZSwNsmpT9ulrjeQIg&gclid=EAIaIQobChMIuIP5wu7RjQMVY9QWBR3loRy3EAAYASAAEgKbAvD_BwE')
+  it("To Verify seamless navigation to Travel Insurance page.", () => {
+     TravelForm.initialPage();
+     });
+    
  
-  //   TravelForm.home(googleVisit, googleSearch,travelVisit);
-  //   TravelForm.TravelVisit(travelVisit);
-  // });
- 
-  it("To Verify accurate selection of a European country and dummy travel dates.", () => {
+  it("To Verify accurate selection of a European country and dummy travel dates.[regression]", () => {
+    cy.visit('https://travel.policybazaar.com/')
     TravelForm.CountryAndDateSelection(travelVisit);
   });
  
-  it('To Verify error message for selecting past travel start dates.',()=>{    
+  it('To Verify error message for selecting past travel start dates.[regression]',()=>{   
+    cy.visit('https://travel.policybazaar.com/') 
     TravelForm.checkInvalidDate()
   })
  
-  it('To Verify error message for selecting travel end date before start date.',()=>{    
+  it('To Verify error message for selecting travel end date before start date.[regression]',()=>{  
+    cy.visit('https://travel.policybazaar.com/')  
     TravelForm.checkEndDateselection()
   })
  
-  it("To Verify successful selection of 2 travelers (Ages 22, 21).", () => {
+  it("To Verify successful selection of 2 travelers (Ages 22, 21).[smoke]", () => {
+    cy.visit('https://travel.policybazaar.com/')
     TravelForm.Passenger(travelVisit);
   });
  
-  it("To Verify display of enquiry contact information", () => {
+  it("To Verify display of enquiry contact information.[sanity]", () => {
+    cy.visit('https://travel.policybazaar.com/')
     TravelForm.CallDetails();
   });
  
-  it("To Verify behavior when no destination is selected but user attempts to proceed.", () => {
+  it("To Verify behavior when no destination is selected but user attempts to proceed.[smoke]", () => {
+    cy.visit('https://travel.policybazaar.com/')
     TravelForm.Date();
     TravelForm.Passenger();
     TravelForm.CallDetails();
@@ -63,13 +51,15 @@ describe("Hackathon Project", () => {
     TravelForm.CountryErrorCheck();
   });
  
-  it("To verify behaviour when no traveller information is selected but user attempts to proceed", () => {
+  it("To verify behaviour when no traveller information is selected but user attempts to proceed.[smoke]", () => {
+    cy.visit('https://travel.policybazaar.com/')
     TravelForm.Date();
     TravelForm.Country();
     TravelForm.CallDetails();
     TravelForm.Result();
     TravelForm.TravellerErrorCheck();
   });
+
 });
  
  

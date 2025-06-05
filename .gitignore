@@ -7,3 +7,5 @@ package-lock.json
 # Ignore Cypress specific files (if needed)
 cypress/screenshots/
 cypress/videos/
+cypress/downloads/
+cypress/reports/

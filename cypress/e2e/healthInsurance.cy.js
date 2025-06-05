@@ -11,6 +11,7 @@ describe('Hackathon Project', () => {
       });
     });
 
+
     before(()=>{
       cy.fixture("healthInsurance").then((data) => {
         ageData = data.ageData;
@@ -22,19 +23,23 @@ describe('Hackathon Project', () => {
       HealthInsurance.visit();      
       HealthInsurance.unCheckAll();
     });
+
  
     it('To Verify toggling "Self" for "Husband" option.', { tags: ['sanity'] },  ()=>{
       HealthInsurance.visit();
+
       HealthInsurance.selfHusband();
       HealthInsurance.unCheckAll();
     });
+
  
     it('To Verify toggling "Self" for "Wife" option.', { tags: ['sanity'] }, ()=>{
       HealthInsurance.visit();
+
       HealthInsurance.selfWife();
       HealthInsurance.unCheckAll();
     });
- 
+
     it('To Verify toggling between "Male" and "Female" visibility.', { tags: ['sanity'] }, ()=>{
       HealthInsurance.visit();
       HealthInsurance.toggleSelf();
@@ -42,13 +47,16 @@ describe('Hackathon Project', () => {
     });
  
 
+
     it('Select all and check for errors.', { tags: ['regression'] }, ()=>
+
     {
       HealthInsurance.visit();
       HealthInsurance.selectAllMemberTypes();
       HealthInsurance.unCheckAll();
      
     })
+
 
     it('Child selection and error validation.', { tags: ['regression'] }, ()=>{
       HealthInsurance.visit();
@@ -57,6 +65,7 @@ describe('Hackathon Project', () => {
       HealthInsurance.verifyChildSelection(child[1])
     })
 
+
     it('Select Parents and children.', { tags: ['retest'] },()=>{
       HealthInsurance.visit();
       HealthInsurance.unCheckAll();
@@ -64,6 +73,7 @@ describe('Hackathon Project', () => {
       HealthInsurance.selectPersonCorrectly();
       HealthInsurance.submitForm();
     })
+
 
     it('Form Submission with Invalid Inputs.', { tags: ['retest'] },()=>{
       HealthInsurance.visit();
@@ -88,7 +98,6 @@ describe('Hackathon Project', () => {
       HealthInsurance.unCheckAll();
       HealthInsurance.selectPersonCorrectly();
       HealthInsurance.submitForm()
-
       HealthInsurance.selectAge((ageData.ageValue),(ageData.ageValue),ageData.kidsage,ageData.kidsage)
       HealthInsurance.submitForm()
     })
