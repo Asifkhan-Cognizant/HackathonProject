@@ -3,8 +3,6 @@ import HealthInsurance from "../support/Pages/HealthInsurance";
 import CarDetails from '../support/Pages/CarDetails.js';
 import invalidPhone from '../support/Pages/Utilities.js';
 
- 
-
 describe("Hackathon Project", () => {
   let googleVisit, googleSearch, travelVisit;
   const TravelForm = new travelForm();
