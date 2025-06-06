@@ -25,7 +25,7 @@ describe("Hackathon Project", () => {
   beforeEach(() => {
     Cypress.on("uncaught:exception", () => {
       return false;
-    });
+    }); 
   });
  
   // it("To Verify seamless navigation to Travel Insurance page.", () => {
@@ -35,15 +35,15 @@ describe("Hackathon Project", () => {
   //   TravelForm.TravelVisit(travelVisit);
   // });
  
-  it("To Verify accurate selection of a European country and dummy travel dates.", () => {
+  it("To Verify accurate selection of a European country and dummy travel dates.[smoke]", () => {
     TravelForm.CountryAndDateSelection(travelVisit);
   });
  
-  it('To Verify error message for selecting past travel start dates.',()=>{    
+  it('To Verify error message for selecting past travel start dates.[regression]',()=>{    
     TravelForm.checkInvalidDate()
   })
  
-  it('To Verify error message for selecting travel end date before start date.',()=>{    
+  it('To Verify error message for selecting travel end date before start date.[unit]',()=>{    
     TravelForm.checkEndDateselection()
   })
  
