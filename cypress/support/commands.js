@@ -26,3 +26,4 @@
  Cypress.Commands.add('travelPage', ()=>{
     cy.visit('https://travel.policybazaar.com/') 
  });
+
