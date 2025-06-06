@@ -1,5 +1,5 @@
-import CarDetails from '../support/Pages/CarDetails.js';
-import invalidPhone from '../support/Pages/Utility.js';
+import CarDetails from '../support/Pages/carDetails.js';
+import invalidPhone from '../support/Pages/Utilities.js';
  
 describe('Policy Bazaar Flow', () => {
 

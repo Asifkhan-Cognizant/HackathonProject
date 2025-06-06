@@ -1,16 +1,4 @@
-const { defineConfig } = require("cypress");
-
-module.exports = defineConfig({
-  "reporter": "cypress-mochawesome-reporter",
-  "defaultCommandTimeout": 30000,
-  "retries": {
-    "runMode": 1,
-    "openMode": 1
-  },
- 
-  "video": true,
-  "scrollBehavior": "nearest",
-   "chromeWebSecurity":false,
+module.exports = {
   "reporter": "cypress-mochawesome-reporter",
   "defaultCommandTimeout": 30000,
   "retries": {
@@ -20,20 +8,15 @@ module.exports = defineConfig({
   "video": true,
   "scrollBehavior": "nearest",
   "chromeWebSecurity": false,
+  env:{
+    grepFilterSpecs : true
+  },
   e2e: {
-    pageLoadTimeout: 1200000,
-    defaultCommandTimeout: 30000,
-    responseTimeout: 30000,
-  //  testIsolation: false,
-
+    "testIsolation" : false,
     setupNodeEvents(on, config) {
-
-
+      require('cypress-grep/src/plugin')(config);
       require('cypress-mochawesome-reporter/plugin')(on);
-
       return config;
-      
-
     },
   },
-});
+};

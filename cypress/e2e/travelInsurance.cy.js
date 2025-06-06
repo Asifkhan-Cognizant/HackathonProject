@@ -59,7 +59,6 @@ describe("Hackathon Project", () => {
     TravelForm.Result();
     TravelForm.TravellerErrorCheck();
   });
-
 });
  
  
