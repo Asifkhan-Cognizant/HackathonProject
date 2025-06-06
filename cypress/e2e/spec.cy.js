@@ -1,8 +1,9 @@
-
- 
 import travelForm from "../support/Pages/TravelInsurance";
 import HealthInsurance from "../support/Pages/HealthInsurance";
+import CarDetails from '../support/Pages/CarDetails.js';
+import invalidPhone from '../support/Pages/Utility.js';
  
+
 describe("Hackathon Project", () => {
   let googleVisit, googleSearch, travelVisit;
   const TravelForm = new travelForm();
@@ -25,39 +26,39 @@ describe("Hackathon Project", () => {
       });
     })
 
-
   it("To Verify seamless navigation to Travel Insurance page.", () => {
-     TravelForm.initialPage();
-     });
+    cy.travelPage();
+    TravelForm.initialPage();
+  });
     
  
   it("To Verify accurate selection of a European country and dummy travel dates.[regression]", () => {
-    cy.visit('https://travel.policybazaar.com/')
+    cy.travelPage();
     TravelForm.CountryAndDateSelection(travelVisit);
   });
  
   it('To Verify error message for selecting past travel start dates.[regression]',()=>{   
-    cy.visit('https://travel.policybazaar.com/') 
+    cy.travelPage();
     TravelForm.checkInvalidDate()
   })
  
   it('To Verify error message for selecting travel end date before start date.[regression]',()=>{  
-    cy.visit('https://travel.policybazaar.com/')  
+    cy.travelPage();
     TravelForm.checkEndDateselection()
   })
  
   it("To Verify successful selection of 2 travelers (Ages 22, 21).[smoke]", () => {
-    cy.visit('https://travel.policybazaar.com/')
+    cy.travelPage();
     TravelForm.Passenger(travelVisit);
   });
  
   it("To Verify display of enquiry contact information.[sanity]", () => {
-    cy.visit('https://travel.policybazaar.com/')
+    cy.travelPage();
     TravelForm.CallDetails();
   });
  
   it("To Verify behavior when no destination is selected but user attempts to proceed.[smoke]", () => {
-    cy.visit('https://travel.policybazaar.com/')
+    cy.travelPage();
     TravelForm.Date();
     TravelForm.Passenger();
     TravelForm.CallDetails();
@@ -66,13 +67,14 @@ describe("Hackathon Project", () => {
   });
  
   it("To verify behaviour when no traveller information is selected but user attempts to proceed.[smoke]", () => {
-    cy.visit('https://travel.policybazaar.com/')
+    cy.travelPage();
     TravelForm.Date();
     TravelForm.Country();
     TravelForm.CallDetails();
     TravelForm.Result();
     TravelForm.TravellerErrorCheck();
   });
+
 ///Car Insurance
 
 
@@ -132,7 +134,6 @@ it('Navigation to Car Insurance page and ability to proceed without car number[s
 
   it("To Verify error message on entering non-numeric characters in phone number field [regression]",()=>{
     invalidPhone.carVisit();
-    //invalidPhone.preload();
     cy.wait(20000);
     invalidPhone.typeName(example.invalidPhone.name);
     invalidPhone.typeMobile(example.invalidPhone.mobile.alphabetic);
@@ -142,32 +143,27 @@ it('Navigation to Car Insurance page and ability to proceed without car number[s
     invalidPhone.verifyMobileError(example.contactDetails.invalidMobileNumber);
   })
 
-
-
   ////HEALTH INSURANCE
-  it('To Verify successful navigation to Health Insurance page.', { tags: ['smoke'] },  ()=>{
-  
+
+      it('To Verify successful navigation to Health Insurance page. [smoke]',  ()=>{  
         HealthInsurance.visit();      
         HealthInsurance.unCheckAll();
       });
-  
    
-      it('To Verify toggling "Self" for "Husband" option.', { tags: ['sanity'] },  ()=>{
-        HealthInsurance.visit();
-  
+      it('To Verify toggling "Self" for "Husband" option. [sanity]',  ()=>{
+        HealthInsurance.visit();  
         HealthInsurance.selfHusband();
         HealthInsurance.unCheckAll();
       });
   
    
-      it('To Verify toggling "Self" for "Wife" option.', { tags: ['sanity'] }, ()=>{
-        HealthInsurance.visit();
-  
+      it('To Verify toggling "Self" for "Wife" option. [sanity]', ()=>{
+        HealthInsurance.visit();  
         HealthInsurance.selfWife();
         HealthInsurance.unCheckAll();
       });
   
-      it('To Verify toggling between "Male" and "Female" visibility.', { tags: ['sanity'] }, ()=>{
+      it('To Verify toggling between "Male" and "Female" visibility. [sanity]', ()=>{
         HealthInsurance.visit();
         HealthInsurance.toggleSelf();
         HealthInsurance.unCheckAll();
@@ -175,17 +171,14 @@ it('Navigation to Car Insurance page and ability to proceed without car number[s
    
   
   
-      it('Select all and check for errors.', { tags: ['regression'] }, ()=>
-  
-      {
+      it('Select all and check for errors. [regression]', ()=>{
         HealthInsurance.visit();
         HealthInsurance.selectAllMemberTypes();
-        HealthInsurance.unCheckAll();
-       
+        HealthInsurance.unCheckAll();       
       })
   
   
-      it('Child selection and error validation.', { tags: ['regression'] }, ()=>{
+      it('Child selection and error validation.[regression]', ()=>{
         HealthInsurance.visit();
         HealthInsurance.unCheckAll();
         HealthInsurance.verifyChildSelection(child[0])
@@ -193,7 +186,7 @@ it('Navigation to Car Insurance page and ability to proceed without car number[s
       })
   
   
-      it('Select Parents and children.', { tags: ['retest'] },()=>{
+      it('Select Parents and children. [retest]', ()=>{
         HealthInsurance.visit();
         HealthInsurance.unCheckAll();
         cy.wait(1000);
@@ -202,7 +195,7 @@ it('Navigation to Car Insurance page and ability to proceed without car number[s
       })
   
   
-      it('Form Submission with Invalid Inputs.', { tags: ['retest'] },()=>{
+      it('Form Submission with Invalid Inputs. [retest]', ()=>{
         HealthInsurance.visit();
         HealthInsurance.unCheckAll();
         cy.wait(1000);
@@ -220,7 +213,7 @@ it('Navigation to Car Insurance page and ability to proceed without car number[s
   
       })
   
-      it('Form Submission with correct values of age.', { tags: ['sanity', 'smoke'] },()=>{
+      it('Form Submission with correct values of age. [sanity, smoke]', ()=>{
         HealthInsurance.visit();
         HealthInsurance.unCheckAll();
         HealthInsurance.selectPersonCorrectly();

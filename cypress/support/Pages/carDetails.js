@@ -6,7 +6,7 @@ class CarDetails {
   clickPrimaryBtn() {
     cy.get("button.primaryBtnV2", { timeout: 30000 })
       .should('be.visible')
-      .click();
+      .click().click();
   }
  
   verifyCarNumberError(invalidCarNumber) {
