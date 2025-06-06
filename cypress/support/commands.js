@@ -23,4 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { 
- import 'cypress-mochawesome-reporter/register'
+ Cypress.Commands.add('travelPage', ()=>{
+    cy.visit('https://travel.policybazaar.com/') 
+ });
+

@@ -24,12 +24,10 @@ class HealthInsurance{
   }
  
   selfHusband(){
-    // this.newSearch();
     this.maleSelf();
   }
  
   selfWife(){
-    // this.newSearch();
     this.femaleSelf();
   }
  
@@ -69,7 +67,6 @@ class HealthInsurance{
  
  
   toggleSelf(){
-    // this.newSearch();
     cy.wait(1000);
     cy.get('input#female').check({force: true}).should('be.checked');
  
