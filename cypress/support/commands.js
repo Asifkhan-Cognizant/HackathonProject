@@ -23,3 +23,10 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { 
+<<<<<<< HEAD
+=======
+ Cypress.Commands.add('travelPage', ()=>{
+    cy.visit('https://travel.policybazaar.com/') 
+ });
+
+>>>>>>> 2b818a78790f2df27881dd60147bc288ac179fc7
