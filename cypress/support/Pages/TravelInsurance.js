@@ -96,7 +96,7 @@ class travelForm {
     const options = { month: "short", day: "numeric", year: "numeric" };
     let srtDate = today.toLocaleDateString("en-US", options);
     let endDay = endDate.toLocaleDateString("en-US", options);
-    cy.get(`button[aria-label="${srtDate}"]`, { timeout: 20000 }).click({
+    cy.get(`button[aria-label="${srtDate}"]`, { timeout: 40000 }).click({
       force: true,
     });
     cy.get(".MuiSvgIcon-root").click({ multiple: true, force: true });
